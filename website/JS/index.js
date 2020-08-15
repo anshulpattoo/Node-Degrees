@@ -5,7 +5,7 @@ function defineElements() {
         video: document.querySelector('video'),
         introSection: document.querySelector('.intro-section'),
         body: document.querySelector('body'),
-        stickyTitleBar: document.querySelector('.animate__fadeIn')
+        stickyTitleBar: document.querySelectorAll('.sticky')
         
     };
     return elements;
@@ -22,9 +22,9 @@ function onload() {
 window.addEventListener('load', onload);
 
 
-window.onscroll = function(ev) {
+window.addEventListener('scroll', function() {
     const elements = defineElements();
-    if (window.scrollY >= elements.introSection.offsetHeight) {
+    if (window.scrollY >= elements.introSection.offsetHeight * 1.25) {
         const markup = `<div class='row sticky animate__animated animate__fadeIn' style="
             text-align: center;
             position: fixed;
@@ -40,7 +40,16 @@ window.onscroll = function(ev) {
                 Github Degrees of Separation
                 </p>
             </div>`;
-        elements.body.insertAdjacentHTML('afterbegin', markup);
-        
+        elements.body.insertAdjacentHTML('afterbegin', markup); 
+    } else {
+        if (elements.stickyTitleBar) {
+            console.log('dsfsfd');
+            elements.stickyTitleBar.forEach(el => {
+                el.classList.add('animate__animated');
+                el.classList.add('animate__fadeOut');
+            });
+        }
     }
-};
+});
+    
+
