@@ -1,13 +1,19 @@
 # See here for image contents: https://github.com/microsoft/vscode-dev-containers/tree/v0.134.0/containers/javascript-node/.devcontainer/base.Dockerfile
-ARG VARIANT="14"
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
+FROM nikolaik/python-nodejs:python3.8-nodejs14
 
-USER node
-# WORKDIR /home/node
-COPY keystore/default.keystore $HOME/.dcp/
-COPY keystore/id.keystore $HOME/.dcp/
+# USER vscode
 
-RUN chown -R 1000:1000 /home/node/.dcp
+RUN mkdir /home/node && \
+    adduser node
+
+# USER node
+
+COPY keystore/default.keystore /home/node/.dcp/
+COPY keystore/id.keystore /home/node/.dcp/
+COPY install.sh /install/
+
+RUN chown -R 1000:1000 /home/node && \
+    /install/install.sh
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
