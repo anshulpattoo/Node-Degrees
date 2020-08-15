@@ -16,6 +16,7 @@ async function main() {
 
     let job, results, startTime
 
+    // TODO: Change this so that it calculates the total number of contributors for each repo
     job = compute.for(["red", "green", "yellow", "blue", "brown", "orange", "pink"],
         function (colour) {
             console.log(colour)
@@ -23,6 +24,7 @@ async function main() {
             return colour
         })
 
+    // Probably don't need to change this
     job.on('accepted',
         function (ev) {
             console.log(` - Job accepted by scheduler, waiting for results`)
@@ -30,11 +32,13 @@ async function main() {
             startTime = Date.now()
         })
 
+    // Probably don't need to change this
     job.on('complete',
         function (ev) {
             console.log(`Job Finished, total runtime = ${Math.round((Date.now() - startTime) / 100) / 10}s`)
         })
 
+    // Probably don't need to change this
     job.on('readystatechange',
         function (arg) {
             console.log(`new ready state: ${arg}`)
