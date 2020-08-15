@@ -1,0 +1,97 @@
+/* ---------------------------------------------------- */
+/* BASIC SETUP */
+/* ---------------------------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E7E6E4;;
+    font-family: 'Lora', 'Libre Baskerville', sans-serif;
+    color: #555;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+}
+
+.row {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+section {
+    padding: 80px 0;
+}
+
+
+/* ---------------------------------------------------- */
+/* HEADER */
+/* ---------------------------------------------------- */
+
+header {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    background-attachment: fixed;
+    margin: 0;
+}
+
+.header-video {
+    overflow: hidden;
+    height: 100%;
+}
+
+.app-intro-text {
+    font-size: 4rem;
+    font-family: "Lora";
+    font-weight: 500;
+    top: 40%;
+    left: 25%;
+    position: absolute;   
+}
+
+.app-intro-text span {
+    display: none;
+}
+
+
+/* Buttons */
+button {
+  height:60px;
+  width:120px;
+  border-radius: 4px;
+  background-color: darkcyan;
+  border:none;
+  font-size:40px;
+  color:#f5f5f5;
+  transition-duration: 0.2s;
+}
+
+button:hover {
+  background-color: cadetblue;
+}
+
+.centred {
+  text-align: center;
+}
+
+/* Navigation/upper website 'bar' */
+
+.row {
+    display: none;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 2px #efefef;
+    z-index: 9999;
+}
