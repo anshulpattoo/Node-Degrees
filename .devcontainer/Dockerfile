@@ -2,10 +2,10 @@
 ARG VARIANT="14"
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 
-# USER vscode
-
-COPY keystore/default.keystore /home/node/.dcp/
-COPY keystore/id.keystore /home/node/.dcp/
+USER node
+# WORKDIR /home/node
+COPY keystore/default.keystore $HOME/.dcp/
+COPY keystore/id.keystore $HOME/.dcp/
 
 RUN chown -R 1000:1000 /home/node/.dcp
 
