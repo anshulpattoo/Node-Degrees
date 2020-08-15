@@ -9,16 +9,15 @@
 }
 
 body {
-    background-color: #E7E6E4;;
+    background-color: #efece8;;
     font-family: 'Lora', 'Libre Baskerville', sans-serif;
     color: #555;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 20px;
     text-rendering: optimizeLegibility;
 }
 
 .row {
-    max-width: 1140px;
     margin: 0 auto;
 }
 
@@ -27,9 +26,9 @@ section {
 }
 
 
-/* ---------------------------------------------------- */
-/* HEADER */
-/* ---------------------------------------------------- */
+/*
+HEADER
+*/
 
 header {
     overflow-x: hidden;
@@ -83,15 +82,13 @@ button:hover {
 
 /* Navigation/upper website 'bar' */
 
-.row {
-    display: none;
-}
-
 .sticky {
+    text-align: center;
     position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
-    width: 100%;
     box-shadow: 0 2px 2px #efefef;
+    height:100px;
     z-index: 9999;
 }
