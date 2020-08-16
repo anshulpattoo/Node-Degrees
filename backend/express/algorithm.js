@@ -33,40 +33,39 @@ function connectionsAmongProjects(project_contributors, compare_contributors) {
 
 
 module.exports.analyzeProject = function analyzeProject(project, dataset) {
-  // The project is a array, dataset is  a json object
-  // react, {}
-  // var totalDegrees = 0;
-  var totalDegrees = new Object();
-  // totalDegrees =dataset;
-  // go through each item in dataset
-  // if it is not react, calculate connections between it and react
-  for (var i = 0; i < Object.keys(dataset).length; i++) {
-    // array compare to array
-    // need to use JSON stringify // see more from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
-    if (JSON.stringify(Object.keys(dataset)[i]) == JSON.stringify(project)) {
-      totalDegress.keys = connectionsAmongProjects(
-        dataset[project],
-        Object.items(dataset)[i]
-      );
-      totalDegress.count = connectionsAmongProjects(
-        dataset[project],
-        Object.items(dataset)[i]
-      ).length;
+    // The project is a array, dataset is  a json object
+    // react, {}
+    // var totalDegrees = 0;
+    var totalDegrees = new Object();
+    // totalDegrees =dataset;
+    // go through each item in dataset
+    // if it is not react, calculate connections between it and react
+    for (var i = 0; i < Object.keys(dataset).length; i++) {
+        // array compare to array
+        // need to use JSON stringify // see more from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
+        if (JSON.stringify(Object.keys(dataset)[i]) == JSON.stringify(project)) {
+            totalDegress.keys = connectionsAmongProjects(
+                dataset[project],
+                Object.items(dataset)[i]
+            );
+            totalDegress.count = connectionsAmongProjects(
+                dataset[project],
+                Object.items(dataset)[i]
+            ).length;
+        }
     }
-  }
-  // add this to the total degree of react
+    // add this to the total degree of react
 
-  return totalDegrees;
+    return totalDegrees;
 };
 
-function buildProjectReleations(contributor_repo_dict) {
+module.exports.buildProjectReleations = function buildProjectReleations(contributor_repo_dict) {
     var repo_dict = {}
-    var keys = Object.keys(contributor_repo_dict)
+    var repo_keys = Object.keys(contributor_repo_dict)
     var values = Object.values(contributor_repo_dict)
 
-    for (var i = 0; i < keys.length; i++) {
+    for (var i = 0; i < repo_keys.length; i++) {
         for (var repo_i = 0; repo_i < values[i].length; repo_i++) {
-            // console.log(contributor_repo_dict[repo_i])
             for (var repo_j = 0; repo_j < values[i].length; repo_j++) {
                 if (repo_i == repo_j) {
                     continue
@@ -82,7 +81,7 @@ function buildProjectReleations(contributor_repo_dict) {
     return repo_dict
 }
 
-function bfsRepoConnections(primary_repo, repo_dict) {
+module.exports.bfsRepoConnections = function bfsRepoConnections(primary_repo, repo_dict) {
     // console.log(repo_dict)
     var keys = Object.keys(repo_dict)
     var found_connections = {}
@@ -112,10 +111,10 @@ function bfsRepoConnections(primary_repo, repo_dict) {
             }
         })
     }
-    console.log(found_connections)
+    return found_connections
 }
 
-var jsonObj = require("../data-collection/contributors-repos.json");
-var repo_dict = buildProjectReleations(jsonObj)
+// var jsonObj = require("../data-collection/contributors-repos.json");
+// var repo_dict = buildProjectReleations(jsonObj)
 
-bfsRepoConnections("webpack-contrib/file-loader", repo_dict)
+// bfsRepoConnections("webpack-contrib/file-loader", repo_dict)

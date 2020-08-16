@@ -16,88 +16,117 @@ const scheduler = "https://scheduler.distributed.computer";
 require("dcp-client").initSync(scheduler)
 
 module.exports.dcp = async function main() {
- 
 
-  return processing().finally((res) => {return res});
+
+    return processing().finally((res) => { return res });
 };
 
 async function processing() {
-  const compute = require("dcp/compute");
-  const wallet = require("dcp/wallet");
+    const compute = require("dcp/compute");
+    const wallet = require("dcp/wallet");
 
-  let job, results, startTime;
+    let job, results, startTime;
 
-  var jsonObj = require("./data-collection/repos-contributors-min-30.json");
+    // var jsonObj = require("./data-collection/contributors-repos.json");
+    var jsonObj = require("../data-collection/contributors-repos.json");
+
+    var repos = new Set()
+
+    Object.values(jsonObj).forEach(function(repo_array) {
+        repo_array.forEach(function(repo_name) {
+            repos.add(repo_name)
+        })
+    })
+
+    repos = ["lodash/lodash"]
+
+    var input_arr = [];
+    repos.forEach(function(repo_name) {
+        input_arr.push([repo_name, jsonObj]); // [[key1,jsonObj],[key2,jsonObj]]
+    })
+
+    console.log("Prepared input")
 
 
+    job = compute.for(input_arr, function(input_arr) {
+        repo_name = input_arr[0]
+        jsonObj = input_arr[1]
 
-  var input_arr = [];
-  for (i = 0; i < Object.keys(jsonObj).length; i++) {
-    // first para is a string
-    // second is object
-    input_arr.push([Object.values(jsonObj)[i], Object.values(jsonObj)]); // [[key1,jsonObj],[key2,jsonObj]]
-  }
+        var results = [];
 
+        const algorithm = require('./algorithm');
 
-  job = compute.for(input_arr, function (key1) {
-    var results = [];
+        var repo_dict = algorithm.buildProjectReleations(jsonObj)
 
-    const algorithm = require('./algorithm');
+        var bfs_connections = algorithm.bfsRepoConnections(repo_name, repo_dict)
 
 
-    progress();
-     return algorithm.analyzeProject(key1[0],key1[1][1])
-    return  {"repo1": key1[1][1], "repo2": key1[0], "length": key1[0].length, "similar": similar};
-    return results;
-  });
+        progress();
+        return [repo_name, bfs_connections]
+    });
 
-  job.requires('./algorithm');
+    job.requires('./algorithm');
+    job.on('status', (status) => { console.log(status) });
 
-  // Probably don't need to change this
-  job.on("accepted", function (ev) {
-    console.log(` - Job accepted by scheduler, waiting for results`);
-    console.log(` - Job has id ${this.id}`);
-    startTime = Date.now();
-  });
+    // Probably don't need to change this
+    job.on("accepted", function(ev) {
+        console.log(` - Job accepted by scheduler, waiting for results`);
+        console.log(` - Job has id ${this.id}`);
+        startTime = Date.now();
+    });
 
-  // Probably don't need to change this
-  job.on("complete", function (ev) {
-    console.log(
-      `Job Finished, total runtime = ${
+    // Probably don't need to change this
+    job.on("complete", function(ev) {
+        console.log(
+            `Job Finished, total runtime = ${
         Math.round((Date.now() - startTime) / 100) / 10
       }s`
-    );
-  });
+        );
+    });
 
-  // Probably don't need to change this
-  job.on("readystatechange", function (arg) {
-    console.log(`new ready state: ${arg}`);
-  });
+    // Probably don't need to change this
+    job.on("readystatechange", function(arg) {
+        console.log(`new ready state: ${arg}`);
+    });
 
- // job.on('console', (event) => console.log(event));
+    // job.on('console', (event) => console.log(event));
 
-  job.on('error', (event) => {
-    console.error("An exception was thrown by the work function:", event.message);
-  });
+    job.on('error', (event) => {
+        console.error("An exception was thrown by the work function:", event.message);
+    });
 
-  job.on("result", function (ev) {
-    console.log(
-      ` - Received result for slice ${ev.sliceNumber} at ${
+    job.on("result", function(ev) {
+        console.log(
+            ` - Received result for slice ${ev.sliceNumber} at ${
         Math.round((Date.now() - startTime) / 100) / 10
       }s`
-    );
-    console.log(` * Wow! ${ev.result} is such a pretty colour!`);
-  });
+        );
+        console.log(` * Wow! ${ev.result} is such a pretty colour!`);
+    });
 
-  job.public.name = "events example, nodejs";
-  job.public.description = "DCP-Client Example examples/node/events.js";
+    job.public.name = "events example, nodejs";
+    job.public.description = "DCP-Client Example examples/node/events.js";
 
-  // This is the default behaviour - change if you have multiple bank accounts
-  // let ks = await wallet.get(); /* usually loads ~/.dcp/default.keystore */
-  // job.setPaymentAccountKeystore(ks);
+    // This is the default behaviour - change if you have multiple bank accounts
+    // let ks = await wallet.get(); /* usually loads ~/.dcp/default.keystore */
+    // job.setPaymentAccountKeystore(ks);
 
-  results = await job.exec(compute.marketValue)
-  // results = await job.localExec();
-  console.log("Results are: ", results.values());
-  return results.values();
+    // results = await job.exec(compute.marketValue)
+    results = await job.localExec();
+
+    degree_list = {}
+
+    results.values().forEach(function(result) {
+            degree_list[result[0]] = result[1]
+        })
+        // console.log("Results are: ", results.values());
+    return degree_list;
 }
+
+const fs = require('fs');
+const dcp = require('./dcp');
+
+dcp.dcp().then((data) => {
+    data = JSON.stringify(data);
+    fs.writeFileSync('output.json', data);
+})
