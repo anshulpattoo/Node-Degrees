@@ -31,51 +31,32 @@ function connectionsAmongProjects(project_contributors, compare_contributors) {
     return similar;
 }
 
-// function binarySearch(arrInput, targetEmail) {
-//   let start = 0;
-//   let end = arrInput.length - 1;
-
-//   while (start <= end) {
-//       let mid = Math.floor((start + end) / 2);
-
-//       if (arrInput[mid] === targetEmail) {
-//           return mid;
-//       }
-
-//       if (targetEmail < arrInput[mid]) {
-//           end = mid - 1;
-//       } else {
-//           start = mid + 1;
-//       }
-//   }
-//   return -1;
-// }
 
 module.exports.analyzeProject = function analyzeProject(project, dataset) {
-    // The project is a array, dataset is  a json object
-    // react, {}
-    // var totalDegrees = 0;
-    var totalDegrees = new Object();
-    totalDegrees = dataset;
-    // go through each item in dataset
-    // if it is not react, calculate connections between it and react
-    // for (var i = 0; i < Object.keys(dataset).length; i++) {
-    //   // array compare to array
-    //   // need to use JSON stringify // see more from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
-    //   if (JSON.stringify(Object.keys(dataset)[i]) == JSON.stringify(project)) {
-    //     totalDegress.keys = connectionsAmongProjects(
-    //       dataset[project],
-    //       Object.items(dataset)[i]
-    //     );
-    //     totalDegress.count = connectionsAmongProjects(
-    //       dataset[project],
-    //       Object.items(dataset)[i]
-    //     ).length;
-    //   }
-    // }
-    // add this to the total degree of react
+  // The project is a array, dataset is  a json object
+  // react, {}
+  // var totalDegrees = 0;
+  var totalDegrees = new Object();
+  // totalDegrees =dataset;
+  // go through each item in dataset
+  // if it is not react, calculate connections between it and react
+  for (var i = 0; i < Object.keys(dataset).length; i++) {
+    // array compare to array
+    // need to use JSON stringify // see more from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
+    if (JSON.stringify(Object.keys(dataset)[i]) == JSON.stringify(project)) {
+      totalDegress.keys = connectionsAmongProjects(
+        dataset[project],
+        Object.items(dataset)[i]
+      );
+      totalDegress.count = connectionsAmongProjects(
+        dataset[project],
+        Object.items(dataset)[i]
+      ).length;
+    }
+  }
+  // add this to the total degree of react
 
-    return totalDegrees;
+  return totalDegrees;
 };
 
 function buildProjectReleations(contributor_repo_dict) {
