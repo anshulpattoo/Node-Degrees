@@ -15,7 +15,20 @@ const scheduler = "https://scheduler.distributed.computer";
  module.exports.dcp = async function main() {
 
   // The key to let it run
-  require('dcp-client').initSync();
+  await require("dcp-client")
+  .init(scheduler)
+  .then(processing)
+  .finally(() => setImmediate(process.exit));
+ 
+// require("dcp-client")
+//   .init(scheduler)
+//   .then(main)
+//   .finally(() => setImmediate(process.exit));
+//  
+}
+
+async function processing(){
+   //require('dcp-client').initSync();
   // Thus the module dcp/compute loaded from dcp-client package
   const compute = require("dcp/compute");
   const wallet = require("dcp/wallet");
@@ -85,9 +98,4 @@ const scheduler = "https://scheduler.distributed.computer";
   console.log("Results are: ", results.values());
   //setImmediate(process.exit)
  return results.values();
-// require("dcp-client")
-//   .init(scheduler)
-//   .then(main)
-//   .finally(() => setImmediate(process.exit));
-//  
 }

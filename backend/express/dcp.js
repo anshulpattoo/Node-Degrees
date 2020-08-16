@@ -15,39 +15,59 @@ const scheduler = "https://scheduler.distributed.computer";
  */
 
 module.exports.dcp = async function main() {
-  require('dcp-client')
-    .initSync()
-    // .then(main)
-    // .finally(() => setImmediate(process.exit));;
+  return require("dcp-client")
+    .init(scheduler)
+    .then(processing)
+    .finally((result) => {
+      //setImmediate(process.exit);
+      return result;
+    });
+};
 
+async function processing() {
   const compute = require("dcp/compute");
   const wallet = require("dcp/wallet");
 
   let job, results, startTime;
 
-  var jsonObj = require("../data-collection/repos-contributors.json");
+  var jsonObj = require("./data-collection/repos-contributors-min-15.json");
 
-  var algorithm = require("./algorithm")
-  console.log(algorithm.analyzeProject)
+  var algorithm = require("./algorithm");
 
-  var input_arr = []
+  var input_arr = [];
   for (i = 0; i < Object.keys(jsonObj).length; i++) {
-    input_arr.push([Object.keys(jsonObj)[i], jsonObj])
+    // first para is a string
+    // second is object
+    input_arr.push([Object.values(jsonObj)[i], Object.values(jsonObj)]); // [[key1,jsonObj],[key2,jsonObj]]
   }
 
-  job = compute.for(input_arr, function (key, jsonObj) {
+  job = compute.for(input_arr, function (key1) {
     var results = [];
-    console.log(key)
 
-    algorithm.analyzeProject(key, jsonObj)
-    // for (var k = 0, length = keys.length; k < length; k++) {
-    //   console.log(jsonObj[keys[k]]);
-    //   console.log(jsonObj[keys[k]]["contributors"].length);
-    //   results.push({ name: keys[k], count: jsonObj[keys[k]]["contributors"].length });
+    console.log("Hello, World!", key1);
+    // analyzeProject(key[1], key[2])
+    var totalDegrees = new Object();
+    
+    // go through each item in dataset
+    // if it is not react, calculate connections between it and react
+    // for (var i = 0; i < Object.keys(dataset).length; i++) {
+    //   // array compare to array
+    //   // need to use JSON stringify // see more from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
+    //   if (JSON.stringify(Object.keys(dataset)[i]) == JSON.stringify(project)) {
+    //     totalDegress.keys = connectionsAmongProjects(
+    //       dataset[project],
+    //       Object.items(dataset)[i]
+    //     );
+    //     totalDegress.count = connectionsAmongProjects(
+    //       dataset[project],
+    //       Object.items(dataset)[i]
+    //     ).length;
+    //   }
     // }
 
     progress();
-    return key.length
+    return keys
+    return  {"email": key1[1][1][1], "name": key1[0][0][0]};
     return results;
   });
 
@@ -69,7 +89,7 @@ module.exports.dcp = async function main() {
   job.on("complete", function (ev) {
     console.log(
       `Job Finished, total runtime = ${
-      Math.round((Date.now() - startTime) / 100) / 10
+        Math.round((Date.now() - startTime) / 100) / 10
       }s`
     );
   });
@@ -79,10 +99,16 @@ module.exports.dcp = async function main() {
     console.log(`new ready state: ${arg}`);
   });
 
+ // job.on('console', (event) => console.log(event));
+
+  job.on('error', (event) => {
+    console.error("An exception was thrown by the work function:", event.message);
+  });
+
   job.on("result", function (ev) {
     console.log(
       ` - Received result for slice ${ev.sliceNumber} at ${
-      Math.round((Date.now() - startTime) / 100) / 10
+        Math.round((Date.now() - startTime) / 100) / 10
       }s`
     );
     console.log(` * Wow! ${ev.result} is such a pretty colour!`);
@@ -98,10 +124,44 @@ module.exports.dcp = async function main() {
   // results = await job.exec(compute.marketValue)
   results = await job.localExec();
   console.log("Results are: ", results.values());
-  return results.values()
+  return results.values();
 }
 
-// require("dcp-client")
-//   .init(scheduler)
-//   .then(main)
-//   .finally(() => setImmediate(process.exit));
+function analyzeProject(project, dataset) {
+  // The project is a array, dataset is  a json object
+  // react, {}
+  // var totalDegrees = 0;
+  var totalDegrees = new Object();
+  totalDegrees = dataset;
+  // go through each item in dataset
+  // if it is not react, calculate connections between it and react
+  // for (var i = 0; i < Object.keys(dataset).length; i++) {
+  //   // array compare to array
+  //   // need to use JSON stringify // see more from https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
+  //   if (JSON.stringify(Object.keys(dataset)[i]) == JSON.stringify(project)) {
+  //     totalDegress.keys = connectionsAmongProjects(
+  //       dataset[project],
+  //       Object.items(dataset)[i]
+  //     );
+  //     totalDegress.count = connectionsAmongProjects(
+  //       dataset[project],
+  //       Object.items(dataset)[i]
+  //     ).length;
+  //   }
+  // }
+  // add this to the total degree of react
+
+  return totalDegrees;
+}
+
+// Return the degree in between the repo
+// repo is a
+function connectionsAmongProjects(project_contributors, compare_contributors) {
+  var similar = [];
+  for (var i = 0; i < project_contributors.length; i++) {
+    if (compare_contributors.indexOf(project_contributors[i]) > -1) {
+      similar.push(project_contributors[i]);
+    }
+  }
+  return similar;
+}
