@@ -8,3 +8,15 @@ backend uses collected data, preferably through a public dataset on the website
 
 
 npm install express body-parser
+
+### Prerequisites
+node and npm installed 
+
+
+### Getting started
+
+```bash
+cd /express
+node express.js
+
+```
