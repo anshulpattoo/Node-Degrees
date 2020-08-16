@@ -1,5 +1,9 @@
 /* ---------------------------------------------------- */
+
+
 /* BASIC SETUP */
+
+
 /* ---------------------------------------------------- */
 
 * {
@@ -9,7 +13,8 @@
 }
 
 body {
-    background-color: #efece8;;
+    background-color: #efece8;
+    ;
     font-family: 'Lora', 'Libre Baskerville', sans-serif;
     color: #555;
     font-weight: 400;
@@ -18,7 +23,7 @@ body {
 }
 
 .row {
-    margin: 0 auto;
+    margin: 30px auto;
 }
 
 section {
@@ -27,7 +32,7 @@ section {
 
 
 /*
-HEADER
+Header
 */
 
 header {
@@ -48,11 +53,10 @@ header {
 
 .app-intro-text {
     font-size: 4rem;
-    font-family: "Lora";
     font-weight: 500;
     top: 40%;
     left: 25%;
-    position: absolute;   
+    position: absolute;
 }
 
 .app-intro-text span {
@@ -61,24 +65,23 @@ header {
 
 
 /* Buttons */
+
 button {
-  height:60px;
-  width:120px;
-  border-radius: 4px;
-  background-color: darkcyan;
-  border:none;
-  font-size:40px;
-  color:#f5f5f5;
-  transition-duration: 0.2s;
+    display: block;
+    height: 60px;
+    width: 120px;
+    border-radius: 4px;
+    background-color: darkcyan;
+    border: none;
+    font-size: 40px;
+    color: #f5f5f5;
+    transition-duration: 0.2s;
 }
 
 button:hover {
-  background-color: cadetblue;
+    background-color: cadetblue;
 }
 
-.centred {
-  text-align: center;
-}
 
 /* Navigation/upper website 'bar' */
 
@@ -89,6 +92,43 @@ button:hover {
     top: 0;
     left: 0;
     box-shadow: 0 2px 2px #efefef;
-    height:100px;
+    height: 100px;
     z-index: 9999;
+    background-color: #000000;
+    font-weight: 300;
+    font-size: 35px;
+    font-family: 'Lato', sans-serif;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+/* Intro section */
+
+.intro-section {
+    text-align: center;
+    display: block;
+    position: relative;
+    margin-top: -170px;
+    font-family: 'Lato';
+    font-weight: 400;
+    color: black;
+}
+
+.intro-section .section-header {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.intro-section .paragraph-container {
+    text-align: justify;
+    text-justify: inter-word;
+    position: absolute;
+    font-size: 20px;
+    width: 55%;
+    top: 60%;
+    left: 22%;
 }

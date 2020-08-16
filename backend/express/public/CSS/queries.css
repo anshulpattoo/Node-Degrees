@@ -1,0 +1,43 @@
+@media only screen and (max-width: 1200px) {
+    .app-intro-text {
+        top: 40%;
+        left: 19%;
+    }
+}
+
+
+/*Small tablet to big tablet: from 768px to 1023px (this is the iPad in landscape mode)*/
+
+@media only screen and (max-width: 1023px) {
+    section {
+        padding: 60px 0px;
+    }
+    .app-intro-text {
+        top: 40%;
+        left: 16%;
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .app-intro-text {
+        top: 40%;
+        left: 10.5%;
+    }
+}
+
+@media only screen and (max-width: 830px) {
+    .app-intro-text {
+        top: 40%;
+        left: 8%;
+    }
+}
+
+
+/* Small phones to small tablets: from 481px to 767px */
+
+@media only screen and (max-width: 767px) {
+    .app-intro-text {
+        top: 40%;
+        left: 4%;
+    }
+}
