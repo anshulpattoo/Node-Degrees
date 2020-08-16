@@ -21,22 +21,19 @@ function onload() {
 
 window.addEventListener('load', onload);
 
+//This functionality is to be reviewed.
+/*
 
 window.addEventListener('scroll', function() {
     const elements = defineElements();
     if (window.scrollY >= elements.introSection.offsetHeight * 1.25) {
-        const markup = `<div class='row sticky animate__animated animate__fadeIn' style="
+        const markup = `<div class='sticky animate__animated animate__fadeIn' style="
             text-align: center;
             position: fixed;
             height:100px;
-            background-color:skyblue;"
+            "
             class="container">
-                <p style="
-                margin-top:20px;
-                font-size:40px;
-                color:black;
-                font-family: 'Libre Caslon Display', serif;
-                ">
+                <p style=" margin-top: 20px;">
                 Github Degrees of Separation
                 </p>
             </div>`;
@@ -51,5 +48,5 @@ window.addEventListener('scroll', function() {
         }
     }
 });
-    
+*/
 

@@ -18,7 +18,7 @@ body {
 }
 
 .row {
-    margin: 0 auto;
+    margin: 30px auto;
 }
 
 section {
@@ -27,7 +27,7 @@ section {
 
 
 /*
-HEADER
+Header
 */
 
 header {
@@ -48,11 +48,10 @@ header {
 
 .app-intro-text {
     font-size: 4rem;
-    font-family: "Lora";
     font-weight: 500;
     top: 40%;
     left: 25%;
-    position: absolute;   
+    position: absolute;
 }
 
 .app-intro-text span {
@@ -62,6 +61,7 @@ header {
 
 /* Buttons */
 button {
+  display: block;
   height:60px;
   width:120px;
   border-radius: 4px;
@@ -76,10 +76,6 @@ button:hover {
   background-color: cadetblue;
 }
 
-.centred {
-  text-align: center;
-}
-
 /* Navigation/upper website 'bar' */
 
 .sticky {
@@ -91,4 +87,42 @@ button:hover {
     box-shadow: 0 2px 2px #efefef;
     height:100px;
     z-index: 9999;
+    background-color: #000000;
+    font-weight: 300;
+    font-size: 35px;
+    font-family: 'Lato', sans-serif;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+}
+
+/* Intro section */
+
+.intro-section {
+    text-align: center;
+    display: block;
+    position: relative;
+    margin-top:-170px;
+    font-family: 'Lato';
+    font-weight: 400;
+    color: black;
+}
+
+.intro-section .section-header {
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.intro-section .paragraph-container {
+    text-align: justify;
+    text-justify: inter-word;
+    position: absolute;
+    font-size: 20px;
+    width: 55%;
+    top: 60%;
+    left: 22%;
+
 }
