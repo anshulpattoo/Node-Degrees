@@ -7,16 +7,16 @@
     <title>Github Repository Degrees of Separation</title>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
     <link rel="stylesheet" type="text/css" href="public/css/normalize.css">
     <link rel="stylesheet" type="text/css" href="public/css/queries.css">
-    <link type="text/css" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
-    <link type="text/css" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-    <link type="text/css" href="http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic" rel="stylesheet" type="text/css">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
-    <link type="text/css" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-    <link type="text/css" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link type="text/css"  href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
+    <link type="text/css"  href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+    <link type="text/css"  href="http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic" rel="stylesheet" type="text/css">
+    <link type="text/css"  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+    <link type="text/css"  href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link type="text/css"  href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 
     <!-- Scripts -->
@@ -26,8 +26,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script async src="https://unpkg.com/typer-dot-js@0.1.0/typer.js"></script>
     <script src="public/js/jquery.waypoints.min.js"></script>
-    <script src="public/js/repos.js"></script>
-    <script src="http://elasticlunr.com/elasticlunr.min.js"></script>
 </head>
 
 <body>
@@ -99,47 +97,51 @@
           margin-left:25vw;
           margin-right:25vw;
           overflow-wrap:break-word;
-        " class='section-header'>Exploring the community of people that drive collaboration platforms</p>
+        "
+        class='section-header'>Exploring the community of people that drive collaboration platforms</p>
         <div class='row paragraph-container'>
             <p>
-                Github brings people together to work for a common cause. Likewise, the contibutors keep the repositories together. Our app intends to visualize how contributors and repositories are interconnected with a graph. We took the top 50 repositories, as well
-                as the contributors from these repositories and looked at how the contributors can connect the repositories. We wanted to ensure that the path between repositories was the shortest path; we decided that we would use DCP to help process
-                the data to make the process faster and smoother. Once the data is processed, we display it on a graph to illustrate the contributors' connections to the repositories. As we can see, the people and their projects are interconnected as
-                they bring the world together through code.
+            Github brings people together to work for a common cause. Likewise, the contibutors
+            keep the repositories together. Our app intends to visualize how contributors and repositories
+            are interconnected with a graph. We took the top 50 repositories, as well as the contributors
+            from these repositories and looked at how the contributors can connect the repositories. We wanted
+            to ensure that the path between repositories was the shortest path; we decided that we would use DCP
+            to help process the data to make the process faster and smoother. Once the data is processed, we display
+            it on a graph to illustrate the contributors' connections to the repositories. As we can see, the people
+            and their projects are interconnected as they bring the world together through code.
             </p>
         </div>
         <div class='row paragraph-container'>
             <p>
-                Below is the implementation we were able to come up with during the event, which uses a mix of Python, JavaScript, and HTML/CSS:
+            Below is the implementation we were able to come up with during the
+            event, which uses a mix of Python, JavaScript, and HTML/CSS:
             </p>
         </div>
-        <!--
-        <div class="centred">
-            <button>Try it</button>
-        </div>
-        -->
     </section>
     <section style="
     margin-bottom: 100px
-    " class="graph-section">
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+    "
+    class="graph-section">
+        <p style="
+          margin-left:25vw;
+          margin-right:25vw;
+          overflow-wrap:break-word;
+        "
+        class='section-header'>Computing the shortest path</p>
+         <div class="row">
+            <form method="post" action="#" class="contact-form">
+                <div class="row input-div">
+                    <label for="name">Compute the degrees of separation between two repositories</label>
+                    <input style="margin-top: 10px;" type="text" name="name" id="name" placeholder="First Repository" required>
+                    <input style="margin-top: 10px;" type="text" name="name" id="name" placeholder="Second Repository" required>
+                </div>
+                <div class='row'>
+                    <button type='button' style="width: 40%; margin: auto;">Compute</button>
+                </div>
+             </form>
+        </div>
     </section>
-    <div>
-
-    </div>
+    
 </body>
 
 </html>
