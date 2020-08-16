@@ -2,7 +2,7 @@
 
 const { json } = require("body-parser");
 
-const scheduler = "https://scheduler.distributed.computer";
+const scheduler = "https://demo-scheduler.distributed.computer/";
 
 /**
  * @file        events.js
@@ -38,7 +38,7 @@ async function processing() {
         })
     })
 
-    repos = ["lodash/lodash"]
+    // repos = ["lodash/lodash"]
 
     var input_arr = [];
     repos.forEach(function(repo_name) {
@@ -111,8 +111,8 @@ async function processing() {
     // let ks = await wallet.get(); /* usually loads ~/.dcp/default.keystore */
     // job.setPaymentAccountKeystore(ks);
 
-    // results = await job.exec(compute.marketValue)
-    results = await job.localExec();
+    results = await job.exec(compute.marketValue)
+    // results = await job.localExec();
 
     degree_list = {}
 

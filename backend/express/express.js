@@ -19,6 +19,8 @@ app.use(express.static(__dirname + '/public'));
 // create application/json parser
 var jsonParser = bodyParser.json()
 
+
+
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -47,18 +49,16 @@ app.get('/compute', jsonParser,async function (req, res) {
   }
 })
 
-app.get('/repo_connections', jsonParser,async function (req, res) {
-  // create user in req.body
+app.get('/degrees', urlencodedParser,function (req, res) {
+  var first = req.query.first
+  var second = req.query.second
 
-  // try to run dcp compute
-  // return json result
-  try {
-    const ret = await dcp.dcp();
-    res.json(ret)
-  } catch (error) {
-    // Passes errors into the error handler
-     console.log(error);
-  }
+  var jsonObj = require("./output.json");
+
+  var degree = jsonObj[first][second].length
+  console.log(degree)
+
+  res.send(String(degree))
 })
 
 app.use('/', router);
@@ -66,3 +66,5 @@ app.use('/', router);
 app.listen(3000, () => {
   console.log("Server is running on port 3000.");
 });
+
+

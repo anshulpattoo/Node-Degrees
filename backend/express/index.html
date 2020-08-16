@@ -7,16 +7,17 @@
     <title>Github Repository Degrees of Separation</title>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" type="text/css"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="public/css/style.css">
-    <link rel="stylesheet" type="text/css" href="public/css/normalize.css">
-    <link rel="stylesheet" type="text/css" href="public/css/queries.css">
-    <link type="text/css"  href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap" rel="stylesheet">
-    <link type="text/css"  href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-    <link type="text/css"  href="http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic" rel="stylesheet" type="text/css">
-    <link type="text/css"  rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
-    <link type="text/css"  href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-    <link type="text/css"  href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/queries.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap">
+    <link rel="stylesheet" type="text/css"
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato:100,300,400,300italic" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 
     <!-- Scripts -->
@@ -31,10 +32,53 @@
 </head>
 
 <body>
+
+    <section  class="graph-section" style="    border-bottom: 1px solid #eee;">
+        <p style="
+        
+        margin-left: 25vw;
+    margin-right: 25vw;
+    overflow-wrap: break-word;
+    font-weight: 700;
+    text-align: center;
+        " class='section-header'>Compute the degrees of separation between repositories</p>
+        <div class="row">
+            <form id="compute_form" class="contact-form">
+                <div class="row input-div">
+                    <label class="repo_label">First repository</label>
+                    <input style="margin-top: 10px;" type="text" name="first" id="repo_1" value ="facebook/prop-types" placeholder="First Repository"
+                        required>
+
+                    <div class="examples">
+                        <p class="repo_option_title">Suggested repos</p>
+                        <div class="repo_options">
+                            <div class="repo_option">facebook/prop-types</div>
+                            <div class="repo_option">jprichardson/node-fs-extra</div>
+                            <div class="repo_option">visionmedia/debug</div>
+                            <div class="repo_option">vuejs/vue</div>
+                            <div class="repo_option">caolan/async</div>
+                        </div>
+                    </div>
+                        
+                    <label class="repo_label">Second repository</label>
+                    <input style="margin-top: 10px;"  value="jprichardson/node-fs-extra" type="text" name="second" id="repo_2" placeholder="Second Repository"
+                        required>
+                </div>
+
+            
+                <div class='row'>
+                    <button id="submit_compute" type='submit' style="width: 40%; margin: auto;">Compute</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+
     <header>
         <div class="header-video">
             <div class='app-intro-text'>
-                <span class="typer" id="main" data-words="A New Look at GitHub Repositories" data-delay="60" data-loop=false></span>
+                <span class="typer" id="main" data-words="A New Look at GitHub Repositories" data-delay="60"
+                    data-loop=false></span>
                 <span class="cursor" data-owner="main"></span>
             </div>
             <!-- use poster attribute for thumbnail -->
@@ -70,6 +114,11 @@
 
 
     </header>
+
+
+
+
+
     <div>
         <p style="
       color:black;
@@ -99,51 +148,112 @@
           margin-left:25vw;
           margin-right:25vw;
           overflow-wrap:break-word;
-        "
-        class='section-header'>Exploring the community of people that drive collaboration platforms</p>
+        " class='section-header'>Exploring the community of people that drive collaboration platforms</p>
         <div class='row paragraph-container'>
             <p>
-            Github brings people together to work for a common cause. Likewise, the contibutors
-            keep the repositories together. Our app intends to visualize how contributors and repositories
-            are interconnected with a graph. We took the top 50 repositories, as well as the contributors
-            from these repositories and looked at how the contributors can connect the repositories. We wanted
-            to ensure that the path between repositories was the shortest path; we decided that we would use DCP
-            to help process the data to make the process faster and smoother. Once the data is processed, we display
-            it on a graph to illustrate the contributors' connections to the repositories. As we can see, the people
-            and their projects are interconnected as they bring the world together through code.
+                Github brings people together to work for a common cause. Likewise, the contibutors
+                keep the repositories together. Our app intends to visualize how contributors and repositories
+                are interconnected with a graph. We took the top 50 repositories, as well as the contributors
+                from these repositories and looked at how the contributors can connect the repositories. We wanted
+                to ensure that the path between repositories was the shortest path; we decided that we would use DCP
+                to help process the data to make the process faster and smoother. Once the data is processed, we display
+                it on a graph to illustrate the contributors' connections to the repositories. As we can see, the people
+                and their projects are interconnected as they bring the world together through code.
             </p>
         </div>
         <div class='row paragraph-container'>
             <p>
-            Below is the implementation we were able to come up with during the
-            event, which uses a mix of Python, JavaScript, and HTML/CSS:
+                Below is the implementation we were able to come up with during the
+                event, which uses a mix of Python, JavaScript, and HTML/CSS:
             </p>
-        </div>
-    </section>
-    <section style="
-    margin-bottom: 100px
-    "
-    class="graph-section">
-        <p style="
-          margin-left:25vw;
-          margin-right:25vw;
-          overflow-wrap:break-word;
-        "
-        class='section-header'>Computing the shortest path</p>
-         <div class="row">
-            <form method="post" action="#" class="contact-form">
-                <div class="row input-div">
-                    <label for="name">Compute the degrees of separation between two repositories</label>
-                    <input style="margin-top: 10px;" type="text" name="name" id="name" placeholder="First Repository" required>
-                    <input style="margin-top: 10px;" type="text" name="name" id="name" placeholder="Second Repository" required>
-                </div>
-                <div class='row'>
-                    <button type='button' style="width: 40%; margin: auto;">Compute</button>
-                </div>
-             </form>
         </div>
     </section>
     
+    <div id="result">
+        <button onclick="close_response()" class="close_button">
+            x
+        </button>
+        <div class="result_body">
+            
+            <div id="result_number"></div>
+            <div class="result_label">Degrees of separation</div>
+        </div>
+        <div class="result_links">
+
+        <div class="result_explain_link">
+          How it works
+        </div>
+
+        <button onclick="close_response()" class="result_close_button">
+           Close
+        </button>
+    </div>
+        
+    </div>
+    <script>
+
+        // init form
+        init_submit();
+       
+        var first_repo = document.querySelector('input[name="first"]')
+        var second_repo = document.querySelector('input[name="second"]')
+function init_submit() {
+    console.log('form initalized')
+    var form = document.getElementById('compute_form')
+    var compute = async function (event) {
+
+        event.preventDefault();
+        let first = form.querySelector('input[name="first"]').value
+        let second = form.querySelector('input[name="second"]').value
+
+        data = {
+            first: first,
+            second: second,
+        }
+
+        send_request(data)
+            .then((response) => render_response(response))
+        
+      
+    }
+    form.addEventListener('submit', compute)
+
+
+}
+
+
+// send data
+
+async function send_request(data) {
+    console.log('sending data', data)
+    let url = '/degrees/?' + Object.keys(data).map(key => key + '=' + data[key]).join('&');
+    console.log(url)
+
+    let response = await fetch(url).then(function(response) {
+        return response.text();
+    });
+
+    return response;
+}
+
+// response
+var result = document.getElementById('result')
+function render_response (response) {
+
+    console.log(response);
+
+
+    result.classList.add('visible')
+    let result_number = document.getElementById('result_number');
+    result_number.innerText = response;
+    
+}
+
+function close_response() {
+    result.classList.remove('visible')
+}
+</script>
+
 </body>
 
 </html>

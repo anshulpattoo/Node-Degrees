@@ -1,6 +1,4 @@
-const el = require('elasticlunr');
-
-repos = [
+[
     "lodash/lodash",
     "facebook/react",
     "chalk/chalk",
@@ -97,17 +95,5 @@ repos = [
     "Leonidas-from-XIV/node-xml2js",
     "gulpjs/gulp-util",
     "graphql/graphql-js",
-    "expressjs/morgan",
+    "expressjs/morgan"
 ]
-
-var index = el(function() {
-    this.addField('repo');
-});
-
-repos.forEach(function(repo) {
-    index.addDoc({
-        "repo": repo
-    })
-})
-
-console.log(index.search("expressjs/morga"), {})
