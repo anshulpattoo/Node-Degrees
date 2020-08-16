@@ -109,7 +109,7 @@ button:hover {
 /* Intro section */
 
 .intro-section {
-    margin-top: -170px;
+    margin-top: -140px;
     text-align: center;
     position: relative;
     font-family: 'Lato';
@@ -118,6 +118,10 @@ button:hover {
 }
 
 .intro-section .section-header {
+    margin-bottom: 40px;
+}
+
+.intro-section .section-header, .graph-section .section-header {
     font-size: 30px;
     font-weight: 600;
     text-align: center;
@@ -132,6 +136,26 @@ button:hover {
     width: 55%;
 }
 
+
+/* Graph rendering/data rendering section */
+
 .graph-section {
+    font-family: 'Lato';
     background-color: #fff;
+    color: black;
 }
+
+.contact-form {
+    width: 60%;
+    margin: 0 auto;
+}
+
+input[type=text], input[type=email], select, textarea {
+    width: 100%;
+    padding: 9px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+*:focus {outline: none;}
+
