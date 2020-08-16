@@ -14,67 +14,40 @@ const scheduler = "https://scheduler.distributed.computer";
  * @date   Aug 2019
  */
 
-async function main() {
+module.exports.dcp = async function main() {
+  require('dcp-client')
+    .initSync()
+    // .then(main)
+    // .finally(() => setImmediate(process.exit));;
+
   const compute = require("dcp/compute");
   const wallet = require("dcp/wallet");
 
   let job, results, startTime;
 
-  // TODO: Change this so that it calculates the total number of contributors for each repo
-  // Main function for populate data from data.json
-  // May change this to populate from github.com API
   var jsonObj = require("../data-collection/repos-contributors.json");
-  // console.log(jsonObj)
-
-  // // Using for func, got do func as well
-  // // Pass the [jsonObj] as first argument where first argument only accept array.
-  // // https://docs.dcp.dev/module-dcp_compute.html
-
-  // var multi_array = ["teaw"]
-  // var curr_array = []
-  // var splits = 4
-
-  // console.log(jsonObj.length)
-
-  // for (var i = 0; i < jsonObj.length; i++) {
-  //   if (i % ceil(jsonObj.length / splits) == 0) {
-  //     multi_array.push(curr_array)
-  //     curr_array = []
-  //   }
-
-  //   curr_array.push(jsonObj[i])
-  // }
-
-  // console.log(multi_array)
 
   var algorithm = require("./algorithm")
   console.log(algorithm.analyzeProject)
-
-  // for (var i = 0; i < Object.values(jsonObj).length; i++) {
-  //   console.log(Object.values(jsonObj)[i])
-  // }
-
-  // [[1,obj],[2,obj],[3,obj],[4,obj]]
-  // [[1,2,3,4], obj]
 
   var input_arr = []
   for (i = 0; i < Object.keys(jsonObj).length; i++) {
     input_arr.push([Object.keys(jsonObj)[i], jsonObj])
   }
 
-  job = compute.for(input_arr, function (keys, jsonObj) {
+  job = compute.for(input_arr, function (key, jsonObj) {
     var results = [];
-    console.log(keys)
+    console.log(key)
 
     algorithm.analyzeProject(key, jsonObj)
     // for (var k = 0, length = keys.length; k < length; k++) {
-      //   console.log(jsonObj[keys[k]]);
-      //   console.log(jsonObj[keys[k]]["contributors"].length);
-      //   results.push({ name: keys[k], count: jsonObj[keys[k]]["contributors"].length });
-      // }
-      
+    //   console.log(jsonObj[keys[k]]);
+    //   console.log(jsonObj[keys[k]]["contributors"].length);
+    //   results.push({ name: keys[k], count: jsonObj[keys[k]]["contributors"].length });
+    // }
+
     progress();
-    return keys.length
+    return key.length
     return results;
   });
 
@@ -125,9 +98,10 @@ async function main() {
   // results = await job.exec(compute.marketValue)
   results = await job.localExec();
   console.log("Results are: ", results.values());
+  return results.values()
 }
 
-require("dcp-client")
-  .init(scheduler)
-  .then(main)
-  .finally(() => setImmediate(process.exit));
+// require("dcp-client")
+//   .init(scheduler)
+//   .then(main)
+//   .finally(() => setImmediate(process.exit));
